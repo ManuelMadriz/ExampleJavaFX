@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class TempShiftController {
+    //Atributos con anotacion @FXML, acceden a un elemento con el mismo fx:id que el nombre del atributo
     @FXML
     private Label lbAnswer;
 
@@ -16,8 +17,10 @@ public class TempShiftController {
     @FXML
     private Spinner<Double> spnValue;
 
-    //Este atributo no es de FXML, solo nos permitira agrupar los radioButtons
-    private  ToggleGroup toggleGroup;
+
+    private  ToggleGroup toggleGroup;//Este atributo no es de FXML, solo nos permitira agrupar los radioButtons
+
+    private Character answerSymbol;
 
     @FXML //Este metodo se ejecuta al iniciar el controlador
     public void initialize() {
@@ -32,6 +35,8 @@ public class TempShiftController {
         spnValue.setValueFactory(valueFactory);
     }
 
+
+    //Metodos anotados con @FXML, pueden ser invocados cuando se ocurre un evento(onClick, onDrag, etc) en un Controls(Button, Label, radioButton, etc)
     @FXML
     private void onConvertButton(){
         double value = spnValue.getValue().doubleValue();
@@ -49,14 +54,20 @@ public class TempShiftController {
             return;
         }
 
-        if(rdCelsiusToFahrenheit.isSelected()) {
+        if(rdCelsiusToFahrenheit.isSelected())
             answer = value * (9.0 / 5) + 32;
-            lbAnswer.setText("El resultado es " + answer + " C°");
-            return;
-        }
+        else
+            answer = (value - 32) * (5.0 / 9);
 
-        answer = (value - 32) * (5.0 / 9);
-        lbAnswer.setText("El resultado es " + answer + " F°");
-        return;
+        lbAnswer.setText("El resultado es " + answer + " " + answerSymbol + "°");
+    }
+
+    @FXML
+    private void onCelsiusToFahrenheitRD() {
+        answerSymbol = 'F';//Cambiar simbolo que usaremos en la respuesta
+    }
+    @FXML
+    private void onFahrenheitToCelsiusRD() {
+        answerSymbol = 'C';//Cambiar simbolo que usaremos en la respuesta
     }
 }
