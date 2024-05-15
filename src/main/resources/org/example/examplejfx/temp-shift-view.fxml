@@ -17,7 +17,7 @@
                </children>
             </HBox>
             <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onConvertButton" text="Convertir" />
-            <Label fx:id="lbAnswer" text="u" />
+            <Label fx:id="lbAnswer" />
          </children>
       </VBox>
    </center>

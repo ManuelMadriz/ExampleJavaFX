@@ -26,14 +26,10 @@ public class TempShiftController {
         rdCelsiusToFahrenheit.setToggleGroup(toggleGroup);
         rdFahrenheitToCelsius.setToggleGroup(toggleGroup);
 
-        //Asignar valueFactory al Spiner de Valor.
+        //Asignar valueFactory al Spinner de Valor.
         //SpinnerValueFactory crea un intancia que se encarga de manejar los limites y valor por defecto del spinner
         SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(-273.15, 10000, 0);
         spnValue.setValueFactory(valueFactory);
-
-
-
-
     }
 
     @FXML
@@ -42,6 +38,14 @@ public class TempShiftController {
         double answer;
 
         if(toggleGroup.getSelectedToggle() == null) {//Verificar si hay un elemento seleccionado del grupo
+            //Si no lo hay, mostrar una alerta
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+            alert.setTitle("Error");
+            alert.setHeaderText("Error de conversión");
+            alert.setContentText("Debe seleccionar un modo de conversión");
+            // Metodo que bloquea las demas ventanas y espera hasta que el usario interactue con el cuadro de dialogo
+            alert.showAndWait();
             return;
         }
 
